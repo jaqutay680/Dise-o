@@ -11,13 +11,11 @@ luxframe/
 ├── js/
 │   └── main.js             ← JavaScript personalizado
 ├── media/
-│   ├── showreel-2024.mp4   ← [AÑADIR] Vídeo principal
-│   ├── showreel-2024.webm  ← [AÑADIR] Alternativa WebM
-│   ├── showreel-es.vtt     ← [AÑADIR] Subtítulos
-│   └── ambient.mp3         ← [AÑADIR] Audio ambiental
-├── img/
-│   ├── originales/         ← Imágenes SIN optimizar (guardar aquí las originales)
-│   └── optimizadas/        ← Imágenes optimizadas para web (WebP, JPG)
+│   ├── showreel-naturaleza.mp4 
+│   ├── showreel-naturaleza.webm  
+│   ├── showreel-es.vtt
+├   ├── ambiente-naturaleza.mp3 
+│   └── Todas las imagenes .jpg-.webp    
 └── GUIA-ESTILOS.md         ← Guía de estilos del proyecto
 ```
 
@@ -33,6 +31,3 @@ luxframe/
 ```bash
 sass scss/custom.scss css/custom.css --watch
 ```
-
-## Archivos multimedia a añadir
-Ver sección PENDIENTE en index.html (comentarios con <!-- NOTA: -->)
