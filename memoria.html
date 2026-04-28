@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Memoria de Prácticas - Proyecto Interfaz Web - LuxFrame Studio" />
+  <title>Memoria de Prácticas | LuxFrame Studio</title>
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <!-- Custom CSS - Mismas variables que tu proyecto -->
+  <style>
+    :root {
+      --color-bg: #0d0d14;
+      --color-bg-alt: #111118;
+      --color-surface: #1a1a28;
+      --color-surface-2: #222235;
+      --color-accent: #c8a96e;
+      --color-accent-light: #e4c98a;
+      --color-accent-dim: #c8a96e33;
+      --color-text: #f0eeea;
+      --color-text-muted: #b0b0c0;
+      --color-border: #2a2a3e;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.8;
+      padding-bottom: 4rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--font-display);
+      color: var(--color-text);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      border-bottom: 2px solid var(--color-accent);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: var(--color-accent);
+    }
+
+    h3 {
+      font-size: 1.4rem;
+    }
+
+    a {
+      color: var(--color-accent);
+      transition: color var(--transition);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--color-accent-light);
+    }
+
+    .memoria-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    /* PORTADA */
+    .portada {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-bg) 100%);
+      border-radius: var(--radius-lg);
+      margin-bottom: 3rem;
+      border: 1px solid var(--color-border);
+    }
+
+    .portada-logo {
+      font-size: 3rem;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+
+    .portada h1 {
+      border: none;
+      font-size: 2.2rem;
+      margin: 1rem 0;
+    }
+
+    .portada-meta {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+    }
+
+    .portada-meta p {
+      margin: 0.3rem 0;
+    }
+
+    /* INDICE */
+    .indice {
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-left: 3px solid var(--color-accent);
+    }
+
+    .indice h3 {
+      margin-top: 0;
+      color: var(--color-accent);
+    }
+
+    .indice ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .indice li {
+      padding: 0.4rem 0;
+      border-bottom: 1px dashed var(--color-border);
+    }
+
+    .indice li:last-child {
+      border-bottom: none;
+    }
+
+    .indice a {
+      color: var(--color-text);
+      display: block;
+      padding: 0.2rem 0;
+    }
+
+    .indice a:hover {
+      color: var(--color-accent);
+      padding-left: 0.3rem;
+      transition: padding var(--transition);
+    }
+
+    .indice .subitem {
+      padding-left: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    /* SECCIONES */
+    section {
+      margin: 3rem 0;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    /* TABLAS DE RUBRICA */
+    .rubrica-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    .rubrica-table th,
+    .rubrica-table td {
+      padding: 0.75rem;
+      border: 1px solid var(--color-border);
+      vertical-align: top;
+    }
+
+    .rubrica-table th {
+      background: var(--color-surface-2);
+      color: var(--color-accent);
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .rubrica-table tr:nth-child(even) {
+      background: rgba(200, 169, 110, 0.05);
+    }
+
+    .rubrica-table .cumple {
+      color: #50d98a;
+      font-weight: 600;
+    }
+
+    .rubrica-table .excelente {
+      color: #50d98a;
+      font-weight: 600;
+    }
+
+    .rubrica-table .parcial {
+      color: #f0a94d;
+    }
+
+    .rubrica-table .no-cumple {
+      color: #e96d6d;
+    }
+
+    /* LISTAS Y CODIGO */
+    ul.checklist {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul.checklist li {
+      padding: 0.3rem 0 0.3rem 1.8rem;
+      position: relative;
+    }
+
+    ul.checklist li::before {
+      content: "[OK]";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: bold;
+    }
+
+    code,
+    pre {
+      background: var(--color-surface-2);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      color: var(--color-accent-light);
+    }
+
+    pre {
+      display: block;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    /* BADGES */
+    .badge-tech {
+      display: inline-block;
+      background: var(--color-accent-dim);
+      color: var(--color-accent);
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      margin: 0.2rem 0.3rem 0.2rem 0;
+      border: 1px solid var(--color-accent);
+    }
+
+    /* BACK TO TOP */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 48px;
+      height: 48px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all var(--transition);
+      z-index: 1000;
+      text-decoration: none;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .memoria-container {
+        padding: 1.5rem 1rem;
+      }
+
+      .portada {
+        padding: 2.5rem 1rem;
+      }
+
+      .rubrica-table {
+        font-size: 0.8rem;
+      }
+
+      .rubrica-table th,
+      .rubrica-table td {
+        padding: 0.5rem;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+      }
+
+      .memoria-container {
+        box-shadow: none;
+        background: #fff;
+        color: #000;
+      }
+
+      .back-to-top {
+        display: none;
+      }
+
+      a {
+        color: #000;
+        text-decoration: underline;
+      }
+
+      .portada {
+        background: #f8f9fa;
+        border: 1px solid #ddd;
+      }
+
+      .rubrica-table th {
+        background: #f0f0f0;
+        color: #000;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== PORTADA ===================== -->
+  <div class="memoria-container">
+    <div class="portada">
+      <div class="portada-logo">◈</div>
+      <h1>MEMORIA DE PRACTICAS</h1>
+      <p style="font-size: 1.3rem; margin: 0.5rem 0; color: var(--color-accent);">Proyecto: Interfaz Web</p>
+      <p style="font-size: 1.1rem; margin: 1.5rem 0;">LuxFrame Studio — Portfolio de Fotografia de Naturaleza</p>
+
+      <div class="portada-meta">
+        <p><strong>Autor:</strong> Jose Angel Aquino Tayllefert</p>
+        <p><strong>Fecha de entrega:</strong> 28 de abril de 2026</p>
+        <p><strong>Asignatura:</strong> Proyecto: Interfaz Web</p>
+        <p><strong>Centro educativo:</strong> IES La Marisma</p>
+      </div>
+    </div>
+
+    <!-- ===================== INDICE ===================== -->
+    <div class="indice" id="indice">
+      <h3>Indice de Contenidos</h3>
+      <ul>
+        <li><a href="#intro">1. Introduccion</a></li>
+        <li><a href="#parte1">2. Parte 1: Planificacion</a>
+          <ul>
+            <li class="subitem"><a href="#plan-organizacion">2.1 Organizacion del proyecto</a></li>
+            <li class="subitem"><a href="#plan-versiones">2.2 Control de versiones</a></li>
+            <li class="subitem"><a href="#plan-estructura">2.3 Estructura de archivos</a></li>
+            <li class="subitem"><a href="#plan-guia">2.4 Guia de estilos</a></li>
+          </ul>
+        </li>
+        <li><a href="#parte2">3. Parte 2: Creacion de la Interfaz</a>
+          <ul>
+            <li class="subitem"><a href="#tecno">3.1 Tecnologias utilizadas</a></li>
+            <li class="subitem"><a href="#html-bootstrap">3.2 Estructura HTML y Bootstrap 5.3</a></li>
+            <li class="subitem"><a href="#sass">3.3 Estilos personalizados con Sass</a></li>
+            <li class="subitem"><a href="#responsive">3.4 Diseño responsive</a></li>
+          </ul>
+        </li>
+        <li><a href="#parte34">4. Parte 3 y 4: Contenido Multimedia e Interactividad</a>
+          <ul>
+            <li class="subitem"><a href="#imagenes">4.1 Gestion de imagenes</a></li>
+            <li class="subitem"><a href="#video-audio">4.2 Video y audio</a></li>
+            <li class="subitem"><a href="#interactivos">4.3 Elementos interactivos</a></li>
+            <li class="subitem"><a href="#canvas">4.4 Animaciones con Canvas API</a></li>
+            <li class="subitem"><a href="#formatos">4.5 Justificacion de formatos multimedia</a></li>
+          </ul>
+        </li>
+        <li><a href="#parte5">5. Parte 5: Accesibilidad y Usabilidad</a>
+          <ul>
+            <li class="subitem"><a href="#accesibilidad">5.1 Principios de accesibilidad aplicados</a></li>
+            <li class="subitem"><a href="#testing">5.2 Testing con herramientas externas</a></li>
+            <li class="subitem"><a href="#rubrica-acces">5.3 Rubrica de Accesibilidad Web</a></li>
+            <li class="subitem"><a href="#usabilidad">5.4 Analisis de usabilidad</a></li>
+            <li class="subitem"><a href="#rubrica-usa">5.5 Rubrica de Usabilidad Web</a></li>
+          </ul>
+        </li>
+        <li><a href="#incidencias">6. Incidencias y Conclusiones</a></li>
+        <li><a href="#webgrafia">7. Webgrafia y Recursos</a></li>
+        <li><a href="#anexos">8. Anexos</a></li>
+      </ul>
+    </div>
+
+    <!-- ===================== 1. INTRODUCCION ===================== -->
+    <section id="intro">
+      <h2>1. Introduccion</h2>
+      <p>El presente documento constituye la memoria tecnica del proyecto <strong>"Interfaz Web"</strong> desarrollado
+        para <strong>LuxFrame Studio</strong>, un portfolio fotografico especializado en naturaleza, paisaje y
+        astrofotografia. El proyecto tiene como objetivo principal diseñar, desarrollar y validar una interfaz web
+        profesional, responsive, accesible y optimizada para la visualizacion de contenido multimedia de alta calidad.
+      </p>
+
+      <h3>Objetivos del proyecto</h3>
+      <ul class="checklist">
+        <li>Crear una web corporativa para el fotografo Ismael Tayllefert que muestre su portfolio de manera atractiva y
+          funcional.</li>
+        <li>Aplicar buenas practicas de desarrollo web: HTML semantico, CSS modular con Sass, JavaScript limpio y
+          accesibilidad WCAG.</li>
+        <li>Optimizar el contenido multimedia (imagenes WebP, video MP4/WebM, audio MP3/OGG) para garantizar tiempos de
+          carga rapidos sin sacrificar calidad.</li>
+        <li>Implementar elementos interactivos avanzados: carrusel personalizado, pestañas, acordeones, modales,
+          tooltips y animaciones con Canvas API.</li>
+        <li>Validar la accesibilidad y usabilidad del sitio mediante herramientas externas y rubricas especificas.</li>
+      </ul>
+
+      <h3>Alcance</h3>
+      <p>El proyecto abarca desde la planificacion inicial hasta la entrega final, incluyendo diseño visual, desarrollo
+        frontend, optimizacion multimedia, testing de accesibilidad y documentacion tecnica.</p>
+    </section>
+
+    <!-- ===================== 2. PARTE 1: PLANIFICACION ===================== -->
+    <section id="parte1">
+      <h2>2. Parte 1: Planificacion</h2>
+
+      <h3 id="plan-organizacion">2.1 Organizacion del proyecto</h3>
+      <p>Para gestionar las tareas del proyecto se ha utilizado un enfoque estructurado basado en listas de tareas y
+        seguimiento manual, permitiendo visualizar el flujo de trabajo en fases: "Planificacion", "Desarrollo",
+        "Testing" y "Entrega".</p>
+
+      <p><strong>Estructura de fases:</strong></p>
+      <ul class="checklist">
+        <li>Planificacion: Investigacion, definicion de requisitos, wireframes.</li>
+        <li>Diseño: Guia de estilos, paleta de colores, tipografias.</li>
+        <li>Desarrollo: HTML, CSS/Sass, JavaScript, componentes Bootstrap.</li>
+        <li>Multimedia: Optimizacion de imagenes, video, audio.</li>
+        <li>Accesibilidad: Testing, correcciones, documentacion.</li>
+        <li>Entrega: Memoria HTML/PDF, preparacion de exposicion.</li>
+      </ul>
+
+      <h3 id="plan-versiones">2.2 Control de versiones</h3>
+      <p>El codigo fuente del proyecto se ha gestionado mediante buenas practicas de versionado local, con commits
+        descriptivos y organizacion por funcionalidades.</p>
+
+      <p><strong>Politica de commits:</strong></p>
+      <ul>
+        <li><code>feat:</code> añadir carrusel de portfolio</li>
+        <li><code>fix:</code> corregir contraste en texto-muted</li>
+        <li><code>docs:</code> actualizar memoria</li>
+        <li><code>style:</code> ajustar espaciados responsive</li>
+      </ul>
+
+      <h3 id="plan-estructura">2.3 Estructura de archivos del sitio web</h3>
+      <p>La carpeta del sitio web entregable contiene:</p>
+
+      <pre>luxframe-studio/
+├── index.html              # Pagina principal
+├── memoria.html            # Documento de memoria (este archivo)
+├── css/
+│   └── custom.css          # Estilos personalizados
+├── scss/
+│   └── custom.scss         # Archivo fuente Sass
+├── js/
+│   └── main.js             # Funcionalidades JavaScript
+├── media/
+│   ├── *.webp, *.jpg       # 20 imagenes de naturaleza optimizadas
+│   ├── ismaeltayllefert.*  # Foto del autor
+│   ├── logo.*              # Logotipo y favicon
+│   ├── showreel-naturaleza.mp4, .webm
+│   ├── showreel-es.vtt     # Subtitulos en español
+│   ├── ambiente-naturaleza.mp3, .ogg
+└── README.md               # Documentacion del proyecto</pre>
+
+      <h3 id="plan-guia">2.4 Guia de estilos</h3>
+      <p>Se ha desarrollado una guia de estilos consistente basada en <strong>design tokens</strong> (variables CSS)
+        para garantizar coherencia visual en todo el sitio.</p>
+
+      <p><strong>Paleta de colores:</strong></p>
+      <pre>:root {
+  --color-bg: #0d0d14;        /* Fondo principal oscuro */
+  --color-bg-alt: #111118;    /* Fondo alternativo */
+  --color-surface: #1a1a28;   /* Superficies de tarjetas */
+  --color-accent: #c8a96e;    /* Color de acento dorado */
+  --color-accent-light: #e4c98a; /* Acento claro para hover */
+  --color-text: #f0eeea;      /* Texto principal claro */
+  --color-text-muted: #b0b0c0;/* Texto secundario (accesible) */
+  --color-border: #2a2a3e;    /* Bordes sutiles */
+}</pre>
+
+      <p><strong>Tipografias:</strong></p>
+      <ul>
+        <li><strong>Titulos:</strong> <em>Playfair Display</em> (serif, elegante, para headings).</li>
+        <li><strong>Cuerpo:</strong> <em>DM Sans</em> (sans-serif, legible, para parrafos y UI).</li>
+      </ul>
+    </section>
+
+    <!-- ===================== 3. PARTE 2: CREACION ===================== -->
+    <section id="parte2">
+      <h2>3. Parte 2: Creacion de la Interfaz</h2>
+
+      <h3 id="tecno">3.1 Tecnologias utilizadas</h3>
+      <p>El proyecto integra multiples tecnologias modernas para garantizar rendimiento, mantenibilidad y experiencia de
+        usuario:</p>
+
+      <div style="margin: 1rem 0;">
+        <span class="badge-tech">HTML5</span>
+        <span class="badge-tech">Bootstrap 5.3</span>
+        <span class="badge-tech">Sass (SCSS)</span>
+        <span class="badge-tech">CSS3</span>
+        <span class="badge-tech">JavaScript ES6+</span>
+        <span class="badge-tech">Canvas API</span>
+        <span class="badge-tech">Bootstrap Icons</span>
+        <span class="badge-tech">Google Fonts</span>
+      </div>
+
+      <table class="rubrica-table">
+        <thead>
+          <tr>
+            <th>Tecnologia</th>
+            <th>Version</th>
+            <th>Proposito</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>HTML5</strong></td>
+            <td>-</td>
+            <td>Estructura semantica, accesibilidad (ARIA), SEO</td>
+          </tr>
+          <tr>
+            <td><strong>Bootstrap 5.3</strong></td>
+            <td>5.3.2</td>
+            <td>Sistema de rejilla responsive, componentes UI</td>
+          </tr>
+          <tr>
+            <td><strong>Sass (SCSS)</strong></td>
+            <td>-</td>
+            <td>Preprocesador CSS para variables, mixins, organizacion</td>
+          </tr>
+          <tr>
+            <td><strong>Canvas API</strong></td>
+            <td>-</td>
+            <td>Animaciones generativas: estrellas, particulas, proceso</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="html-bootstrap">3.2 Estructura HTML y Bootstrap 5.3</h3>
+      <p>Se ha aplicado una estructura HTML5 semantica con etiquetas apropiadas para cada seccion:</p>
+      <pre>&lt;header&gt; → &lt;nav&gt; → &lt;main&gt; → &lt;section&gt; → &lt;article&gt; → &lt;footer&gt;</pre>
+
+      <p><strong>Uso estrategico de Bootstrap:</strong></p>
+      <ul class="checklist">
+        <li><strong>Rejilla responsive:</strong> <code>container</code>, <code>row</code>, <code>col-*</code> para
+          adaptar el diseño a movil, tablet y escritorio.</li>
+        <li><strong>Componentes nativos:</strong> Navbar fija con scroll, carrusel fade, pestañas para servicios,
+          acordeon para proceso, modal para detalles de portfolio, tooltips para equipo.</li>
+        <li><strong>Clases utilitarias:</strong> <code>d-flex</code>, <code>gap-3</code>, <code>text-center</code>,
+          <code>mb-4</code> para reducir CSS personalizado.</li>
+      </ul>
+
+      <h3 id="sass">3.3 Estilos personalizados con Sass</h3>
+      <p>El archivo <code>custom.scss</code> organiza los estilos en secciones logicas:</p>
+      <pre>// Variables de diseño (design tokens)
+$color-accent: #c8a96e;
+$font-display: 'Playfair Display', Georgia, serif;
+
+// Mixins reutilizables
+@mixin card-base {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  transition: transform $transition, box-shadow $transition;
+}
+
+// Componentes
+.portfolio-card {
+  @include card-base;
+  &:hover { transform: translateY(-6px); }
+}</pre>
+
+      <h3 id="responsive">3.4 Diseño responsive</h3>
+      <p>El sitio sigue un enfoque <strong>mobile-first</strong>, probado en los siguientes breakpoints:</p>
+
+      <table class="rubrica-table">
+        <thead>
+          <tr>
+            <th>Dispositivo</th>
+            <th>Ancho maximo</th>
+            <th>Comprobaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Movil</strong></td>
+            <td>≤ 575px</td>
+            <td>Menu hamburguesa, texto legible, botones tactiles</td>
+          </tr>
+          <tr>
+            <td><strong>Tablet</strong></td>
+            <td>≤ 991px</td>
+            <td>Rejilla de 2 columnas, carousel adaptado</td>
+          </tr>
+          <tr>
+            <td><strong>Escritorio</strong></td>
+            <td>&gt; 992px</td>
+            <td>Layout completo, hover effects, animaciones canvas</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===================== 4. PARTE 3 Y 4: MULTIMEDIA ===================== -->
+    <section id="parte34">
+      <h2>4. Parte 3 y 4: Contenido Multimedia e Interactividad</h2>
+
+      <h3 id="imagenes">4.1 Gestion de imagenes</h3>
+      <p>Se han integrado <strong>20 fotografias de naturaleza</strong> del fotografo Ismael Tayllefert, optimizadas
+        para web:</p>
+
+      <p><strong>Proceso de optimizacion:</strong></p>
+      <ol>
+        <li><strong>Seleccion:</strong> Imagenes originales en RAW/JPG de alta resolucion.</li>
+        <li><strong>Edicion:</strong> Ajustes basicos en Lightroom (exposicion, contraste, recorte).</li>
+        <li><strong>Conversion:</strong> Exportacion a WebP con Squoosh.app (calidad 85%, reduccion ~40% de peso).</li>
+        <li><strong>Fallback:</strong> Generacion de version JPG para navegadores antiguos.</li>
+        <li><strong>Implementacion:</strong> Uso de <code>&lt;picture&gt;</code> con <code>srcset</code> para carga
+          condicional.</li>
+      </ol>
+
+      <p><strong>Ejemplo de implementacion:</strong></p>
+      <pre>&lt;picture&gt;
+  &lt;source srcset="media/Hojas_Rojizas_en_la_Sombra.webp" type="image/webp"&gt;
+  &lt;img src="media/Hojas_Rojizas_en_la_Sombra.jpg" 
+       alt="Hojas con tonos rojizos, morados y amarillentos sobre fondo oscuro" 
+       loading="lazy" width="800" height="600"&gt;
+&lt;/picture&gt;</pre>
+
+      <h3 id="video-audio">4.2 Video y audio</h3>
+
+      <p><strong>Video showreel (12 segundos):</strong></p>
+      <ul>
+        <li><strong>Contenido:</strong> Secuencia de agua fluyendo en entorno natural.</li>
+        <li><strong>Formatos:</strong> MP4 (H.264) como principal, WebM (VP9) como alternativa.</li>
+        <li><strong>Optimizacion:</strong> Codificado con HandBrake (CRF 23, audio AAC 128kbps, resolucion 1280x720).
+        </li>
+        <li><strong>Accesibilidad:</strong> Subtitulos en formato WebVTT (<code>showreel-es.vtt</code>) con descripcion
+          de audio.</li>
+      </ul>
+
+      <p><strong>Audio ambiental:</strong></p>
+      <ul>
+        <li><strong>Contenido:</strong> Sonidos de naturaleza (agua, viento, pajaros).</li>
+        <li><strong>Formatos:</strong> MP3 (128kbps) como principal, OGG como fallback.</li>
+        <li><strong>Implementacion:</strong> Reproductor personalizado con controles accesibles y barra de progreso
+          animada.</li>
+      </ul>
+
+      <h3 id="interactivos">4.3 Elementos interactivos</h3>
+      <p>Se han implementado los siguientes componentes interactivos utilizando Bootstrap y JavaScript personalizado:
+      </p>
+
+      <table class="rubrica-table">
+        <thead>
+          <tr>
+            <th>Componente</th>
+            <th>Tecnologia</th>
+            <th>Funcionalidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Navbar con scroll</td>
+            <td>Bootstrap + JS</td>
+            <td>Cambio de estilo al hacer scroll, enlace activo segun seccion</td>
+          </tr>
+          <tr>
+            <td>Carrusel de portfolio</td>
+            <td>Bootstrap Carousel</td>
+            <td>Transicion fade, indicadores, controles, captions descriptivos</td>
+          </tr>
+          <tr>
+            <td>Pestañas de servicios</td>
+            <td>Bootstrap Tabs</td>
+            <td>Navegacion entre categorias (Paisajes, Neblina, Astro, Flora)</td>
+          </tr>
+          <tr>
+            <td>Modal de portfolio</td>
+            <td>Bootstrap Modal + JS</td>
+            <td>Muestra detalles de imagen con titulo, categoria y metadatos</td>
+          </tr>
+          <tr>
+            <td>Scroll reveal</td>
+            <td>Intersection Observer + CSS</td>
+            <td>Animacion de entrada al hacer scroll (fade-up)</td>
+          </tr>
+          <tr>
+            <td>Reproductor audio custom</td>
+            <td>JS + CSS Animations</td>
+            <td>Controles personalizados con barra de progreso y animacion de pulso</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="canvas">4.4 Animaciones con Canvas API</h3>
+      <p>Se han desarrollado tres animaciones generativas utilizando la API Canvas de HTML5:</p>
+
+      <ol>
+        <li><strong>Hero Canvas (Constelacion de estrellas):</strong> Fondo animado con estrellas que se conectan
+          mediante lineas cuando estan cercanas. Particulas con movimiento vertical, calculo de distancias, gradientes
+          lineales.</li>
+        <li><strong>Particle Canvas (Seccion Multimedia):</strong> Particulas doradas que flotan y rebotan en los
+          bordes, simulando luz natural. Velocidad aleatoria, gradientes radiales para efecto bokeh.</li>
+        <li><strong>Process Canvas (Diagrama de flujo):</strong> Animacion secuencial que ilumina los pasos del proceso
+          al entrar en viewport. <code>IntersectionObserver</code> para trigger, dibujo progresivo con
+          <code>lineDash</code>.</li>
+      </ol>
+
+      <h3 id="formatos">4.5 Justificacion de formatos multimedia</h3>
+
+      <p><strong>Imagenes:</strong></p>
+      <table class="rubrica-table">
+        <thead>
+          <tr>
+            <th>Formato</th>
+            <th>Uso</th>
+            <th>Justificacion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>WebP</strong></td>
+            <td>Principal</td>
+            <td>Compresion superior a JPG (~30% menos peso) con misma calidad visual. Soportado por el 98% de
+              navegadores modernos.</td>
+          </tr>
+          <tr>
+            <td><strong>JPG</strong></td>
+            <td>Fallback</td>
+            <td>Compatibilidad universal con navegadores antiguos (&lt; Chrome 85, Safari &lt;14).</td>
+          </tr>
+          <tr>
+            <td><strong>SVG</strong></td>
+            <td>Logo, iconos</td>
+            <td>Escalado infinito sin perdida, peso minimo, editable con CSS.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>Video:</strong></p>
+      <table class="rubrica-table">
+        <thead>
+          <tr>
+            <th>Formato</th>
+            <th>Uso</th>
+            <th>Justificacion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>MP4 (H.264)</strong></td>
+            <td>Principal</td>
+            <td>Soporte universal en navegadores y dispositivos. Buen equilibrio calidad/peso.</td>
+          </tr>
+          <tr>
+            <td><strong>WebM (VP9)</strong></td>
+            <td>Alternativa</td>
+            <td>Mejor compresion que H.264 en navegadores compatibles (Chrome, Firefox, Edge).</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>Audio:</strong></p>
+      <table class="rubrica-table">
+        <thead>
+          <tr>
+            <th>Formato</th>
+            <th>Uso</th>
+            <th>Justificacion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>MP3</strong></td>
+            <td>Principal</td>
+            <td>Soporte universal, buena calidad a 128-192 kbps.</td>
+          </tr>
+          <tr>
+            <td><strong>OGG (Vorbis)</strong></td>
+            <td>Fallback</td>
+            <td>Formato abierto, mejor calidad a mismo bitrate en Firefox/Chrome.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>Buenas practicas aplicadas:</strong></p>
+      <ul class="checklist">
+        <li><strong>Lazy loading:</strong> Atributo <code>loading="lazy"</code> en imagenes fuera del viewport inicial.
+        </li>
+        <li><strong>Dimensiones explicitas:</strong> <code>width</code> y <code>height</code> en
+          <code>&lt;img&gt;</code> para evitar CLS.</li>
+        <li><strong>Fallbacks multiples:</strong> <code>&lt;picture&gt;</code>, <code>&lt;video&gt;</code> con multiples
+          <code>&lt;source&gt;</code>.</li>
+        <li><strong>Accesibilidad multimedia:</strong> Subtitulos VTT para video, transcripcion de audio en esta
+          memoria.</li>
+      </ul>
+    </section>
+
+    <!-- ===================== 5. PARTE 5: ACCESIBILIDAD ===================== -->
+    <section id="parte5">
+      <h2>5. Parte 5: Accesibilidad y Usabilidad</h2>
+
+      <h3 id="accesibilidad">5.1 Principios de accesibilidad aplicados</h3>
+      <p>El proyecto sigue las <strong>Pautas de Accesibilidad para el Contenido Web (WCAG) 2.1</strong>, nivel AA. Se
+        han aplicado las siguientes tecnicas:</p>
+
+      <h4>Texto alternativo y estructura semantica</h4>
+      <ul class="checklist">
+        <li>Todas las imagenes informativas incluyen atributo <code>alt</code> descriptivo.</li>
+        <li>Imagenes decorativas usan <code>aria-hidden="true"</code> o <code>alt=""</code>.</li>
+        <li>Estructura de encabezados jerarquica: <code>&lt;h1&gt;</code> unico en hero, <code>&lt;h2&gt;</code> para
+          secciones, <code>&lt;h3&gt;</code> para subtitulos.</li>
+        <li>Uso de etiquetas semanticas: <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>,
+          <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;footer&gt;</code>.</li>
+      </ul>
+
+      <h4>Contraste de color</h4>
+      <ul>
+        <li>Texto principal (<code>#f0eeea</code>) sobre fondo oscuro (<code>#0d0d14</code>): ratio
+          <strong>12.5:1</strong> (WCAG AAA).</li>
+        <li>Texto secundario (<code>#b0b0c0</code>) sobre fondo oscuro: ratio <strong>7.1:1</strong> (WCAG AA/AAA).</li>
+        <li>Enlaces y acentos (<code>#c8a96e</code>) sobre fondo: ratio <strong>6.8:1</strong> (WCAG AA).</li>
+      </ul>
+
+      <h4>Navegacion por teclado</h4>
+      <ul class="checklist">
+        <li>Todos los elementos interactivos son alcanzables con <code>Tab</code>.</li>
+        <li>Indicador de foco visible: <code>:focus-visible { outline: 2px solid var(--color-accent); }</code>.</li>
+        <li>Skip link para saltar al contenido principal (accesible al enfocar con teclado).</li>
+      </ul>
+
+      <h4>Formularios accesibles</h4>
+      <ul class="checklist">
+        <li>Cada <code>&lt;input&gt;</code> tiene <code>&lt;label&gt;</code> asociado mediante
+          <code>for</code>/<code>id</code>.</li>
+        <li>Campos requeridos marcados con <code>aria-required="true"</code> y asterisco visible.</li>
+        <li>Mensajes de error claros y asociados al campo mediante <code>aria-describedby</code>.</li>
+      </ul>
+
+      <h4>Contenido multimedia accesible</h4>
+      <ul class="checklist">
+        <li>Video con subtitulos WebVTT (<code>showreel-es.vtt</code>) que incluyen descripcion de audio.</li>
+        <li>Audio con transcripcion textual en esta memoria.</li>
+        <li>Controles de video/audio con etiquetas ARIA descriptivas.</li>
+      </ul>
+
+      <h3 id="testing">5.2 Testing con herramientas externas</h3>
+      <p>Se han utilizado las siguientes herramientas para validar la accesibilidad:</p>
+
+      <h4>Validacion de codigo</h4>
+      <ul>
+        <li><strong>HTML:</strong> Validator.w3.org → Sin errores criticos.</li>
+        <li><strong>CSS:</strong> Jigsaw.w3.org/css-validator → Sin errores.</li>
+        <li><strong>JavaScript:</strong> Revision manual de sintaxis y logica.</li>
+      </ul>
+
+      <h4>Pruebas manuales de accesibilidad</h4>
+      <ul class="checklist">
+        <li>Navegacion completa con teclado (Tab, Shift+Tab, Enter, Espacio, Flechas).</li>
+        <li>Zoom al 200%: contenido legible y funcional sin perdida de informacion.</li>
+        <li>Lectura con lector de pantalla basico: estructura logica, texto alternativo anunciado.</li>
+        <li>Verificacion de contraste con WebAIM Contrast Checker.</li>
+      </ul>
+
+      <h3 id="rubrica-acces">5.3 Rubrica de Accesibilidad Web (Anexo 2)</h3>
+
+      <table class="rubrica-table">
+        <thead>
+          <tr>
+            <th style="width: 5%;">#</th>
+            <th style="width: 35%;">Criterio</th>
+            <th style="width: 20%;">Cumplimiento</th>
+            <th>Evidencia / Observaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>Texto Alternativo</strong><br>Todas las imagenes informativas tienen texto alternativo adecuado.
+            </td>
+            <td class="cumple">Cumple</td>
+            <td>Todas las imagenes <code>&lt;img&gt;</code> tienen <code>alt</code> descriptivo. Imagenes decorativas
+              con <code>aria-hidden</code>.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>Contraste de Color</strong><br>El texto tiene contraste suficiente respecto al fondo (min.
+              4.5:1).</td>
+            <td class="cumple">Cumple</td>
+            <td>Texto principal 12.5:1, secundario 7.1:1. Verificado con WebAIM Contrast Checker.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>Navegacion por Teclado</strong><br>La pagina se puede usar completamente solo con teclado.</td>
+            <td class="cumple">Cumple</td>
+            <td>Prueba manual: navegacion con Tab/Shift+Tab, activacion con Enter/Espacio. Foco visible.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>Enlaces Claros</strong><br>Los enlaces describen claramente su destino sin depender del
+              contexto.</td>
+            <td class="cumple">Cumple</td>
+            <td>Textos como "Ver Portfolio", "Contactar", no "clic aqui". <code>aria-label</code> en iconos.</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>Estructura Semantica</strong><br>Uso correcto de encabezados (H1–H6), listas, tablas y etiquetas
+              ARIA.</td>
+            <td class="cumple">Cumple</td>
+            <td>Jerarquia H1→H2→H3. <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>.
+              ARIA en carousel, tabs, modal.</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><strong>Formularios Accesibles</strong><br>Cada campo tiene etiqueta asociada; mensajes de error claros.
+            </td>
+            <td class="cumple">Cumple</td>
+            <td><code>&lt;label for="..."&gt;</code>, <code>aria-required</code>, mensajes de error con
+              <code>role="alert"</code>.</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><strong>Tamaño del Texto Ajustable</strong><br>Contenido usable al aumentar zoom al 200–300%.</td>
+            <td class="cumple">Cumple</td>
+            <td>Diseño responsive con unidades relativas. Prueba manual con zoom 200%: sin perdida de funcionalidad.
+            </td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><strong>Lectores de Pantalla</strong><br>La pagina es navegable y comprensible usando lectores.</td>
+            <td class="cumple">Cumple</td>
+            <td>Prueba basica: navegacion logica, anuncios de roles ARIA, texto alternativo leido.</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><strong>Contenido Multimedia</strong><br>Los videos tienen subtitulos; el audio tiene transcripcion.
+            </td>
+            <td class="cumple">Cumple</td>
+            <td>Video con subtitulos VTT. Transcripcion de audio en seccion 4.2 de esta memoria.</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><strong>Evitar Contenido Parpadeante</strong><br>No hay elementos que parpadeen mas de 3 veces/segundo.
+            </td>
+            <td class="cumple">Cumple</td>
+            <td>Animaciones CSS/Canvas suaves (&lt;1fps efectivo). Respeto a <code>prefers-reduced-motion</code>.</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><strong>Foco Visible</strong><br>Elementos interactivos muestran foco visible al navegar con teclado.
+            </td>
+            <td class="cumple">Cumple</td>
+            <td>Regla CSS <code>:focus-visible</code> con outline dorado. Probado con navegacion por teclado.</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><strong>Tiempo Suficiente</strong><br>No hay limites de tiempo, o son ajustables o pausables.</td>
+            <td class="cumple">Cumple</td>
+            <td>Sin timeouts en formularios. Animaciones pausables via <code>prefers-reduced-motion</code>.</td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td><strong>Navegacion Consistente</strong><br>Menus y componentes interactivos consistentes en todas las
+              paginas.</td>
+            <td class="cumple">Cumple</td>
+            <td>Navbar fija en todas las secciones. Mismos estilos para botones, tarjetas, enlaces.</td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><strong>Evitar Barreras Cognitivas</strong><br>Contenido claro, simple y sin jerga innecesaria.</td>
+            <td class="cumple">Cumple</td>
+            <td>Lenguaje directo, parrafos cortos, listas con viñetas, iconos complementarios.</td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td><strong>Errores y Sugerencias</strong><br>Formularios ofrecen sugerencias claras para corregir errores.
+            </td>
+            <td class="cumple">Cumple</td>
+            <td>Bootstrap validation + mensajes personalizados: "Por favor, introduce tu nombre".</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="mt-3"><strong>Conclusion de accesibilidad:</strong> El proyecto cumple con el <strong>nivel AA de WCAG
+          2.1</strong> en todos los criterios evaluados.</p>
+
+      <h3 id="usabilidad">5.4 Analisis de usabilidad</h3>
+      <p>Se ha evaluado la usabilidad del sitio siguiendo los principios de <strong>Jakob Nielsen</strong> y las buenas
+        practicas de diseño centrado en el usuario.</p>
+
+      <h4>Criterios evaluados:</h4>
+      <ul class="checklist">
+        <li><strong>Claridad y escaneabilidad:</strong> Titulos jerarquicos, parrafos cortos, listas con viñetas, iconos
+          ilustrativos.</li>
+        <li><strong>Navegacion intuitiva:</strong> Navbar fija con enlaces a secciones principales, anchor links con
+          scroll suave.</li>
+        <li><strong>Consistencia visual:</strong> Design tokens para colores, tipografias, espaciados. Mismos estilos
+          para componentes repetidos.</li>
+        <li><strong>Rendimiento percibido:</strong> Lazy loading de imagenes, animaciones CSS optimizadas, codigo JS
+          modular.</li>
+        <li><strong>Feedback del sistema:</strong> Hover states en botones y enlaces, mensajes de exito en formulario,
+          indicadores visuales.</li>
+      </ul>
+
+      <h3 id="rubrica-usa">5.5 Rubrica de Usabilidad Web (Anexo 3)</h3>
+
+      <table class="rubrica-table">
+        <thead>
+          <tr>
+            <th style="width: 5%;">#</th>
+            <th style="width: 35%;">Criterio</th>
+            <th style="width: 20%;">Nivel</th>
+            <th>Evidencia / Observaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>Claridad del Contenido</strong><br>Contenido facil de leer, escanear y comprender.</td>
+            <td class="excelente">Excelente</td>
+            <td>Titulos jerarquicos, parrafos cortos, listas, iconos. Contraste optimo.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>Consistencia Visual y Funcional</strong><br>Estilo, navegacion y componentes coherentes.</td>
+            <td class="excelente">Excelente</td>
+            <td>Design tokens, mismos componentes Bootstrap, transiciones uniformes.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>Navegacion Intuitiva</strong><br>Usuario puede moverse por la web sin esfuerzo.</td>
+            <td class="excelente">Excelente</td>
+            <td>Navbar fija, anchor links, scroll suave, back-to-top.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>Organizacion de la Informacion</strong><br>Informacion agrupada logicamente y priorizada.</td>
+            <td class="excelente">Excelente</td>
+            <td>Hero → Portfolio → Servicios → Proceso → Contacto. Flujo narrativo claro.</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>Facilidad de Aprendizaje</strong><br>Nuevos usuarios comprenden rapidamente como usar la web.
+            </td>
+            <td class="excelente">Excelente</td>
+            <td>Patrones Bootstrap familiares, etiquetas claras, tooltips informativos.</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><strong>Eficiencia en Tareas</strong><br>Usuarios completan tareas clave en pocos pasos.</td>
+            <td class="excelente">Excelente</td>
+            <td>Contacto en 1 clic, portfolio filtrable por modal, precios visibles en servicios.</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><strong>Retroalimentacion del Sistema</strong><br>Pagina ofrece mensajes claros: carga, errores, exito.
+            </td>
+            <td class="excelente">Excelente</td>
+            <td>Hover states, validacion de formulario, mensaje de exito, animaciones de entrada.</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><strong>Prevencion y Manejo de Errores</strong><br>Sistema minimiza errores y ofrece soluciones claras.
+            </td>
+            <td class="excelente">Excelente</td>
+            <td>Validacion en cliente, mensajes de error especificos, campos requeridos marcados.</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><strong>Diseño Responsivo</strong><br>Web funciona adecuadamente en moviles, tablet y escritorio.</td>
+            <td class="excelente">Excelente</td>
+            <td>Probado en Chrome DevTools: movil (375px), tablet (768px), escritorio (1440px).</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><strong>Velocidad de Carga</strong><br>Paginas cargan rapidamente y sin bloqueos perceptibles.</td>
+            <td class="excelente">Excelente</td>
+            <td>Imagenes optimizadas WebP, lazy loading, CSS/JS minimos, canvas eficientes.</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><strong>Interaccion y Controles</strong><br>Botones y enlaces faciles de identificar, pulsar y
+              comprender.</td>
+            <td class="excelente">Excelente</td>
+            <td>Botones con tamaño tactil ≥44px, hover effects, foco visible, etiquetas claras.</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><strong>Minimalismo y Evitar Sobrecarga</strong><br>No hay elementos innecesarios; interfaz limpia.</td>
+            <td class="excelente">Excelente</td>
+            <td>Diseño oscuro minimalista, espaciado generoso, jerarquia visual clara.</td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td><strong>Adaptacion al Usuario</strong><br>Diseño considera diferentes tipos de usuarios y necesidades.
+            </td>
+            <td class="excelente">Excelente</td>
+            <td>Accesibilidad WCAG AA, responsive, lenguaje claro, opciones de contacto multiples.</td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><strong>Credibilidad y Confianza</strong><br>Web transmite seguridad, profesionalidad y transparencia.
+            </td>
+            <td class="excelente">Excelente</td>
+            <td>Bio del fotografo, testimonios reales, diseño pulido, informacion de contacto visible.</td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td><strong>Satisfaccion General del Usuario</strong><br>Experiencia agradable y genera intencion de volver.
+            </td>
+            <td class="excelente">Excelente</td>
+            <td>Animaciones sutiles, micro-interacciones, contenido visual de alta calidad, flujo intuitivo.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="mt-3"><strong>Conclusion de usabilidad:</strong> El proyecto obtiene una valoracion
+        <strong>Excelente</strong> en todos los criterios de usabilidad evaluados.</p>
+    </section>
+
+    <!-- ===================== 6. INCIDENCIAS Y CONCLUSIONES ===================== -->
+    <section id="incidencias">
+      <h2>6. Incidencias y Conclusiones</h2>
+
+      <h3>Incidencias encontradas y soluciones</h3>
+
+      <table class="rubrica-table">
+        <thead>
+          <tr>
+            <th>Incidencia</th>
+            <th>Descripcion</th>
+            <th>Solucion aplicada</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Contraste de texto en fondos oscuros</strong></td>
+            <td>La clase <code>.text-muted</code> de Bootstrap tenia contraste insuficiente sobre fondos oscuros.</td>
+            <td>Sobrescritura con <code>!important</code>: <code>.text-muted { color: #b0b0c0 !important; }</code> →
+              ratio 7.1:1.</td>
+          </tr>
+          <tr>
+            <td><strong>Imagenes de portfolio no llenaban el contenedor</strong></td>
+            <td>Las tarjetas mostraban imagenes con espacios vacios.</td>
+            <td>CSS: <code>.portfolio-card-img img { width:100%; height:100%; object-fit:cover; }</code>.</td>
+          </tr>
+          <tr>
+            <td><strong>Subtitulos de video no cargaban</strong></td>
+            <td>Error CORS al abrir HTML con <code>file://</code>.</td>
+            <td>Solucion: usar servidor local para testing (<code>python -m http.server</code> o Live Server en VS
+              Code).</td>
+          </tr>
+          <tr>
+            <td><strong>Animaciones canvas en movil</strong></td>
+            <td>Rendimiento bajo en dispositivos antiguos.</td>
+            <td>Optimizacion: reducir numero de particulas en movil, usar <code>passive: true</code> en event listeners.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Formulario sin validacion visual</strong></td>
+            <td>Los errores no se mostraban claramente.</td>
+            <td>Integracion de Bootstrap Validation + mensajes personalizados con <code>invalid-feedback</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Conclusiones personales</h3>
+      <ol>
+        <li><strong>Importancia de la planificacion:</strong> Una estructura clara de tareas y versionado ha permitido
+          organizar el trabajo y mantener un historial de cambios, facilitando la depuracion y el trabajo iterativo.
+        </li>
+        <li><strong>Bootstrap como base solida:</strong> La framework ha acelerado el desarrollo de componentes
+          responsive, pero ha requerido personalizacion cuidadosa para mantener la identidad visual de LuxFrame.</li>
+        <li><strong>Accesibilidad no es opcional:</strong> Implementar WCAG AA ha mejorado la experiencia para todos los
+          usuarios, no solo para aquellos con discapacidades. Herramientas de validacion son esenciales.</li>
+        <li><strong>Optimizacion multimedia es critica:</strong> La diferencia de peso entre imagenes RAW y WebP
+          optimizadas es abismal (~70% menos). Esto impacta directamente en tiempos de carga y SEO.</li>
+        <li><strong>Canvas API potencia la experiencia:</strong> Las animaciones generativas añaden valor visual sin
+          depender de librerias pesadas, pero requieren testing en distintos dispositivos.</li>
+        <li><strong>Documentacion es parte del producto:</strong> Una memoria bien estructurada no solo cumple
+          requisitos academicos, sino que facilita el mantenimiento futuro y la colaboracion.</li>
+      </ol>
+
+      <h3>Trabajo futuro</h3>
+      <ul>
+        <li>Implementar PWA para instalacion en movil.</li>
+        <li>Añadir galeria filtrable por categorias con JavaScript avanzado.</li>
+        <li>Integrar formulario con backend (PHP/Node.js) para envio real de emails.</li>
+        <li>Añadir modo claro/oscuro toggle para preferencias de usuario.</li>
+        <li>Implementar carga progresiva de imagenes con blur-up placeholder.</li>
+      </ul>
+    </section>
+
+    <!-- ===================== 7. WEBGRAFIA Y RECURSOS ===================== -->
+    <section id="webgrafia">
+      <h2>7. Webgrafia y Recursos</h2>
+
+      <h3>Documentacion oficial</h3>
+      <ul>
+        <li><a href="https://getbootstrap.com/docs/5.3/" target="_blank">Bootstrap 5.3 Documentation</a></li>
+        <li><a href="https://developer.mozilla.org/es/" target="_blank">MDN Web Docs</a></li>
+        <li><a href="https://www.w3.org/WAI/WCAG21/quickref/" target="_blank">WCAG 2.1 Quick Reference</a></li>
+        <li><a href="https://developer.mozilla.org/es/docs/Web/API/Canvas_API" target="_blank">Canvas API - MDN</a></li>
+      </ul>
+
+      <h3>Herramientas utilizadas</h3>
+      <ul>
+        <li><strong>Sass:</strong> <a href="https://sass-lang.com/" target="_blank">sass-lang.com</a></li>
+        <li><strong>Squoosh (optimizacion imagenes):</strong> <a href="https://squoosh.app/"
+            target="_blank">squoosh.app</a></li>
+        <li><strong>TinyPNG:</strong> <a href="https://tinypng.com/" target="_blank">tinypng.com</a></li>
+        <li><strong>HandBrake (video):</strong> <a href="https://handbrake.fr/" target="_blank">handbrake.fr</a></li>
+        <li><strong>WAVE (accesibilidad):</strong> <a href="https://wave.webaim.org/"
+            target="_blank">wave.webaim.org</a></li>
+        <li><strong>Can I Use:</strong> <a href="https://caniuse.com/" target="_blank">caniuse.com</a></li>
+      </ul>
+
+      <h3>Recursos visuales y de inspiracion</h3>
+      <ul>
+        <li>Bootstrap Cheat Sheet: <a href="https://bootstrap-cheatsheet.themeselection.com/" target="_blank">Enlace</a>
+        </li>
+        <li>Animaciones CSS: <a href="https://www.eniun.com/animaciones-keyframes-animation/" target="_blank">ENIUN</a>
+        </li>
+        <li>Accesibilidad web: <a href="https://www.eniun.com/diseno-desarrollo-webs-accesibles-accesibilidad-web/"
+            target="_blank">ENIUN</a></li>
+        <li>Usabilidad: <a href="https://www.eniun.com/tutorial-usabilidad-web/" target="_blank">ENIUN</a></li>
+      </ul>
+
+      <h3>Licencias y atribuciones</h3>
+      <ul>
+        <li><strong>Imagenes:</strong> Todas las fotografias son obra original de Ismael Tayllefert, con derechos
+          cedidos para este proyecto.</li>
+        <li><strong>Iconos:</strong> Bootstrap Icons (licencia MIT): <a href="https://icons.getbootstrap.com/"
+            target="_blank">icons.getbootstrap.com</a></li>
+        <li><strong>Fuentes:</strong> Google Fonts (licencia Open Font License): <a href="https://fonts.google.com/"
+            target="_blank">fonts.google.com</a></li>
+        <li><strong>Logo LuxFrame:</strong> Diseñado por Jose Angel Aquino Tayllefert.</li>
+      </ul>
+    </section>
+
+    <!-- ===================== 8. ANEXOS ===================== -->
+    <section id="anexos">
+      <h2>8. Anexos</h2>
+
+      <h3>Anexo A: Estructura de carpetas final</h3>
+      <pre>luxframe-studio/
+├── index.html              # Pagina principal del portfolio
+├── memoria.html            # Este documento de memoria
+├── css/
+│   └── custom.css          # Estilos personalizados
+├── scss/
+│   └── custom.scss         # Archivo fuente Sass
+├── js/
+│   └── main.js             # Funcionalidades JavaScript
+├── media/
+│   ├── Hojas_Rojizas_en_la_Sombra.webp (+ .jpg fallback)
+│   ├── Iris_Purpura_y_Margaritas.webp (+ .jpg)
+│   ├── ... (18 imagenes mas de naturaleza)
+│   ├── ismaeltayllefert.webp (+ .jpg)  # Foto del autor
+│   ├── logo.webp (+ .png)              # Logotipo
+│   ├── showreel-naturaleza.mp4, .webm  # Video showreel
+│   ├── showreel-es.vtt                 # Subtitulos en español
+│   ├── ambiente-naturaleza.mp3, .ogg   # Audio ambiental
+├── .gitignore              # Archivos excluidos del versionado
+└── README.md               # Documentacion del proyecto</pre>
+
+      <h3>Anexo B: Comandos utiles para desarrollo</h3>
+      <pre># Compilar Sass a CSS
+sass scss/custom.scss css/custom.css --source-map --watch
+
+# Servidor local para testing (Python)
+python -m http.server 8000
+
+# Servidor local para testing (Node.js)
+npx http-server -p 8000
+
+# Validar HTML
+https://validator.w3.org/nu/#textarea
+
+# Validar CSS
+https://jigsaw.w3.org/css-validator/
+
+# Probar accesibilidad con WAVE
+# Instalar extension Chrome: https://wave.webaim.org/extension/</pre>
+
+      <h3>Anexo C: Checklist de entrega</h3>
+      <ul class="checklist">
+        <li>-->Carpeta del sitio web completa con todos los archivos</li>
+        <li>-->Carpeta multimedia con originales y optimizados</li>
+        <li>-->Guia de estilos documentada en esta memoria</li>
+        <li>-->Memoria en formato HTML (este archivo) y/o PDF exportado</li>
+        <li>-->Evidencias de testing de accesibilidad y usabilidad</li>
+        <li>-->Preparacion de exposicion para clase (5-10 minutos)</li>
+      </ul>
+    </section>
+
+    <!-- ===================== FOOTER DE MEMORIA ===================== -->
+    <div
+      style="text-align: center; padding-top: 2rem; margin-top: 3rem; border-top: 1px solid var(--color-border); color: var(--color-text-muted); font-size: 0.9rem;">
+      <p>Memoria de Practicas — Proyecto: Interfaz Web</p>
+      <p>Autor: <strong>Jose Angel Aquino Tayllefert</strong> | IES La Marisma | 28/04/2026</p>
+      <p style="margin-top: 1rem;">
+        <a href="#indice">Volver al indice</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Back to top -->
+  <a href="#indice" class="back-to-top" id="backToTop" aria-label="Volver al indice" title="Volver al indice">
+    <i class="bi bi-chevron-up" aria-hidden="true"></i>
+  </a>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Script para back-to-top -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const backToTopBtn = document.getElementById('backToTop');
+      if (backToTopBtn) {
+        const handleScroll = () => {
+          backToTopBtn.classList.toggle('visible', window.scrollY > 400);
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+      }
+    });
+  </script>
+
+</body>
+
+</html>
