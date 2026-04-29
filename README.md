@@ -15,7 +15,9 @@ luxframe/
 │   ├── showreel-naturaleza.webm  
 │   ├── showreel-es.vtt
 ├   ├── ambiente-naturaleza.mp3 
-│   └── Todas las imagenes .jpg-.webp    
+│   └── Todas las imagenes .jpg-.webp
+├── memoria.html            ← Memoria del proyecto
+├── trello.png              ← Organización usando trello 
 └── GUIA-ESTILOS.md         ← Guía de estilos del proyecto
 ```
 
