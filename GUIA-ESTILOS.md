@@ -1,5 +1,4 @@
 # Guía de Estilos — LuxFrame Studio
-**Versión:** 1.0 | **Fecha:** Enero 2025
 
 ---
 
